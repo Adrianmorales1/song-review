@@ -40,7 +40,24 @@ body {
     position: absolute;
     bottom: 0;
     left: 8px;
+    transition: 0.3s ease ;
+    
 }
+
+.switch:active{
+    border-bottom: 1px solid #12ff00;
+    
+}
+
+
+.switch.active:after{
+    left:82px;
+    width: 70px;
+    background: #12ff00;
+    border-bottom: 1px solid #12ff00;
+}
+
+
 
 .login{
     padding: 5px 12px;
@@ -120,6 +137,17 @@ input::placeholder{
 }
 
 #btn {
+    padding: 5px 25px;
+    background: linear-gradient(45deg, #0326f9,#01fcf9);
+    border-radius: 50px;
+    font-size: 25px;
+    text-transform: uppercase;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+a.btn{
     padding: 5px 25px;
     background: linear-gradient(45deg, #0326f9,#01fcf9);
     border-radius: 50px;
