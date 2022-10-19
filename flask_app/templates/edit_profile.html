@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Users/johnnytran/Desktop/Python/flask/fundamentals/SongReview/templates/static/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <title>Edit Profile</title>
+</head>
+
+<body class="bg-info text-white" >
+    <div class="container ">
+
+        <div class="flex-container">
+            <h1 class="text-center text-info bg-light">Edit Profile for {{song_review.user.first_name}}</h1>
+            <div class="text-right">
+                <a class="btn btn-light text-info "href="/dashboard">Dashboard</a>
+                <a class="btn btn-light text-info " href="/logout">Log Out</a>
+            </div>
+        </div>
+        <br><br>
+        <div>
+            <h3>If you would like to edit an entry, here is the place to do so!</h3>
+        </div>
+        <br><br>
+        <div>
+            {% with messages = get_flashed_messages() %}
+            <!-- declare a variable called messages -->
+            {% if messages %}
+            <!-- check if there are any messages -->
+            {% for message in messages %}
+            <!-- loop through the messages -->
+            <p class="error">{{message}}</p> <!-- display each message in a paragraph tag -->
+            {% endfor %}
+            {% endif %}
+
+            {% endwith %}
+        </div>
+
+        <form action="/locations/{{location.id}}" method="post" 
+            class="flex-container with-border majority-width">
+            <div class="half-width">
+                <div class="form-group">
+                    <label for="first_name" class="form-label">First Name:</label>
+                    <input type="text" name="first name" class="form-control" id="firstname" value="{{song_review.user.first_name}}">
+                </div>
+                <div class="form-group">
+                    <label for="last_name" class="form-label">Last Name:</label>
+                    <input type="text" name="last name" class="form-control" id="lastname" value="{{song_review.user.last_name}}">
+                </div>
+                <div class="form-group">
+                    <label for="email_address" class="form-label">Email Address:</label>
+                    <input type="text" name="email address" class="form-control" id="email" value="{{song_review.user.email_address}}">
+                </div>
+            
+            </div>
+
+            <div class="half-width">
+                <input type="hidden" name="id" value="{{song_review.id}}">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-light text-info " value="Submit">
+                </div>
+            </div>
+        </form>
+
+
+
+    </div>
+
+</body>
+
+
+<style>
+
+    label {
+        font-size: 25px;
+    }
+
+    h3 {
+        text-size-adjust: 25px;
+        border: 2px solid white;
+        border-radius: 10px;
+        padding: 10px;
+    }
+    body {
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+    thead th{
+    font-size: 25px;
+    }
+    h1 {
+        font-size: 50px;
+        border: 2px solid white;
+        border-radius: 10px;
+    }
+</style>
+
+</html>
