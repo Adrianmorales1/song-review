@@ -52,7 +52,15 @@ class User:
         user = cls(row)
         return user
 
+    @classmethod
+    def follow(cls,data):
+        query = "INSERT INTO followers(user_id, follower_id) VALUES (%(user_id)s,%(id)s)"
+        return connectToMySQL(cls.db).query_db(query,data)
 
+    @classmethod
+    def unfollow(cls,data):
+        query = "DELETE FROM followers WHERE user_id = %(user_id)s AND follower_id = %(id)s"
+        return connectToMySQL(cls.db).query_db(query,data)
 
     #validation static methods
     @staticmethod
