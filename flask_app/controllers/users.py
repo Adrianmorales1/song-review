@@ -47,10 +47,10 @@ def login_user():
 
 @app.route('/dashboard')
 def dashboard():
-    if not User.validate_session(session):
-        return redirect('/')
-
-    return render_template('dashboard.html')
+    #if not User.validate_session(session):
+    #   return redirect('/')
+   
+    return render_template('home_page.html')
 
 @app.route('/edit_profile/<int:user_id>') #This is going to be the route for the Render of the Edit html
 def edit_profile_page(user_id): 
