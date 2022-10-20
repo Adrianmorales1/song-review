@@ -24,7 +24,7 @@
                 {% endfor %}
             {% endif %}
         {% endwith %}
-        <form id="form" action="/reg/user" method="post"> 
+        <form id="form" action="/login" method="post"> 
             <div id="page">
                 <label>Login Form</label>
                 <div class="element">
@@ -60,7 +60,7 @@
                     <input type="password" name="confirm_password" placeholder="Confirm Password">
                     <span class="fas fa-lock"></span>
                 </div>
-                <button id="btn">Register</button>
+                <button id="btn"  type="submit"formaction="/reg/user">Register</button>
             </div>
         </form>
         

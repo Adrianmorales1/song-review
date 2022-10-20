@@ -23,10 +23,10 @@ def register_user():
         'email' : request.form['email'],
         'password' : pw_hash
     }
-
+    print(register_data)
     user_id = User.save_user(register_data)
     session['user_id'] = user_id
-    return redirect('/dashboard')
+    return redirect('/edit_profile/<int:user_id>')
 
 @app.route('/login', methods = ['POST'])
 def login_user():
