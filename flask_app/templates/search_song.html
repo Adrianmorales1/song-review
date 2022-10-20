@@ -10,11 +10,16 @@
     <title>Document</title>
 </head>
 <body>
+    
     <div class="container">
         <form action="/track/search" method="post">
-            <input type="text" name="query">
-            <button>Search Button</button>
-        </form>
+            <div class="input-group mb-3"> 
+                <input type="text" class="form-control" name="query" placeholder="Search Song" aria-label="Search Song" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </form>
+            </div>
         
         {% for track in track_list%}
         <img src="{{ track['image_url'] }}" alt="{{ track['title'] }}">
