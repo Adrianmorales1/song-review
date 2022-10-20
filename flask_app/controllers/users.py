@@ -49,11 +49,12 @@ def login_user():
 
 @app.route('/dashboard')
 def dashboard():
-    #if not User.validate_session(session):
-    #   return redirect('/')
-   all_reviews = Review.get_all_review_with_user()
-   for review in all_reviews:
-    review['track_data'] = Track.get_one_track_by_id(review['track_id'])
+    if not User.validate_session(session):
+       return redirect('/')
+    user_data = session['user_id']
+    all_reviews = Review.get_all_review_with_user()
+    for review in all_reviews:
+        review['track_data'] = Track.get_one_track_by_id(review['track_id'])
     return render_template('home_page.html')
 
 @app.route('/edit_profile/<int:user_id>') #This is going to be the route for the Render of the Edit html
@@ -74,6 +75,11 @@ def update_profile():
     }
     User.update_user(data)
     return redirect('/edit_profile/<id:user_id>')
+
+@app.route('/profile/page')
+def profile_page():
+    user_data = User.get_user_by_id(session['user_id'])
+    return render_template('profile_page.html', user = user_data)
 
 @app.route('/reset')
 def log_out():
