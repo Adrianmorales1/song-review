@@ -8,3 +8,10 @@ function tab2(){
     login.style.background = "none";
     signup.style.background = "background: linear-gradient(45deg,#00d5fc, #046af6);";
 }
+
+function tab1(){
+    form.style.marginLeft = "0";
+    login.style.background = "none";
+    register.style.background = "background: linear-gradient(45deg,#00d5fc, #046af6);";
+    switchs[current - 1 ].classList.remove("active");
+}
