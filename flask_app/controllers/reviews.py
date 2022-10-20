@@ -39,6 +39,8 @@ def unfavorite_review():
 
 @app.route('/track/search')
 def testing():
+    if not User.validate_session(session):
+       return redirect('/')
     if session.get('track_list') == None:
         return render_template('search_song.html')
     else :
@@ -59,11 +61,15 @@ def track_search():
 
 @app.route('/track/review/<string:track_id>')
 def review_track(track_id):
+    if not User.validate_session(session):
+       return redirect('/')
     track_data = Track.get_one_track_by_id(track_id)
     return render_template('add_review.html', track = track_data)
 
 @app.route('/profile/user/<int:user_id>')
 def user_profile(user_id):
+    if not User.validate_session(session):
+       return redirect('/')
     data = {
         'id' : user_id
     }

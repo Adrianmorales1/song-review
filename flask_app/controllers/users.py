@@ -64,6 +64,8 @@ def dashboard():
 
 @app.route('/edit_profile/<int:user_id>') #This is going to be the route for the Render of the Edit html
 def edit_profile_page(user_id): 
+    if not User.validate_session(session):
+       return redirect('/')
     data = {
         'id': user_id
     }
@@ -82,6 +84,8 @@ def update_profile():
 
 @app.route('/profile/page')
 def profile_page():
+    if not User.validate_session(session):
+       return redirect('/')
     data = {
         'id' : session['user_id']
     }
