@@ -1,6 +1,6 @@
 from flask_app import app
 from flask_app.config.mysqlconnection import connectToMySQL
-from flask import Flask, flash, session
+from flask import Flask, flash, request, session
 import re
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
@@ -81,7 +81,7 @@ class User:
             is_valid = False
         if len(data['password']) < 8:
             flash('Password must be at least 8 characters', 'register')
-        if data['password'] != data['confirm_password']:
+        if data['password'] != request.form['confirm_password']:
             flash('Passwords do not match!', 'register')
             is_valid = False
         

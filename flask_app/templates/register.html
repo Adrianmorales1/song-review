@@ -17,6 +17,13 @@
     </div>
 
     <div class="outer">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <form id="form" action="/reg/user" method="post"> 
             <div id="page">
                 <label>Login Form</label>
@@ -50,18 +57,11 @@
                     <span class="fas fa-lock"></span>
                 </div>
                 <div class="element">
-                    <input type="password" placeholder="Confirm Password">
+                    <input type="password" name="confirm_password" placeholder="Confirm Password">
                     <span class="fas fa-lock"></span>
                 </div>
                 <button id="btn">Register</button>
             </div>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                    {% for message in messages %}
-                        <p>{{message}}</p>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
         </form>
         
     </div>
