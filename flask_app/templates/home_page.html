@@ -46,7 +46,12 @@
                           <div class="card-body">
                             <h6 class="card-title text-dark">{{track['title']}} By: {{track['artist']}}</h6>
                             <p class="card-text text-dark">{{review['content']}}</p>
-                            <p class = "card-text text-secondary">By: {{review.creator.first_name}} {{review.creator.last_name}}</p>
+                            {% if review.creator.id != session['user_id']%} 
+                                <p class = "card-text text-secondary">By: <a href="/profile/user/{{review.creator.id}}">{{review.creator.first_name}} {{review.creator.last_name}}</a></p>
+                            {% endif %}
+                            {% if review.creator.id == session['user_id']%} 
+                                <p class = "card-text text-secondary">By: <a href="/profile/page">{{review.creator.first_name}} {{review.creator.last_name}}</a></p>
+                            {% endif %}
                             <div class = "row">
                               <div class = "col-6">
                               {% for x in range(review.rating)%}

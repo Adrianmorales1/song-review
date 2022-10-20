@@ -50,6 +50,9 @@ def testing():
 @app.route('/searching', methods = ['POST'])
 def track_search():
     query = request.form['query']
+    if len(query) < 1:
+        flash("Search must have at least one character")
+        return redirect('/track/search')
     track_list = Track.search_query(query)
     session['track_list'] = track_list
     return redirect('/track/search')
@@ -58,3 +61,16 @@ def track_search():
 def review_track(track_id):
     track_data = Track.get_one_track_by_id(track_id)
     return render_template('add_review.html', track = track_data)
+
+@app.route('/profile/user/<int:user_id>')
+def user_profile(user_id):
+    data = {
+        'id' : user_id
+    }
+    user_data = User.get_user_by_id(data)
+    all_reviews1 = Review.get_all_reviews_with_one_user(data)
+    all_tracks1 = []
+    for review in all_reviews1:
+        print(Track.get_one_track_by_id(review.track_id))
+        all_tracks1.append(Track.get_one_track_by_id(review.track_id))
+    return render_template("user_profile.html", user = user_data, all_reviews = all_reviews1, all_tracks = all_tracks1)
