@@ -5,9 +5,6 @@ from flask_app.models.user import User
 from flask_app.controllers import users
 from flask_app.models.track import Track
 
-@app.route('/add/review')
-def add_review():
-    return render_template("add_review.html")
 
 @app.route('/add/review/one', methods = ['POST'])
 def add_reviews():

@@ -13,7 +13,7 @@ class Review:
         self.track_id = data['track_id']
         self.created_at = data['created_at']
         self.updated_at = data['updated_at']
-        self.track_data = {}
+        self.track_data = None
         self.creator = None
         self.user_who_liked= []
         self.user_ids_who_liked = []

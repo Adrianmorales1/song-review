@@ -52,10 +52,12 @@ def dashboard():
     if not User.validate_session(session):
        return redirect('/')
     user_data = session['user_id']
-    all_reviews = Review.get_all_review_with_user()
-    for review in all_reviews:
-        review['track_data'] = Track.get_one_track_by_id(review['track_id'])
-    return render_template('home_page.html')
+    all_reviews1 = Review.get_all_review_with_user()
+    all_review_tracks1 = []
+    for review in all_reviews1:
+        print(Track.get_one_track_by_id(review.track_id))
+        all_review_tracks1.append(Track.get_one_track_by_id(review.track_id))
+    return render_template('home_page.html', all_reviews = all_reviews1, all_review_tracks = all_review_tracks1)
 
 @app.route('/edit_profile/<int:user_id>') #This is going to be the route for the Render of the Edit html
 def edit_profile_page(user_id): 
