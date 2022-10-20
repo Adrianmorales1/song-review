@@ -10,7 +10,7 @@
 </head>
 <body>
       <div class="container justify-content-center">
-          <div class = "row justify-content-center">
+          <div class = "row justify-content-center p-1">
               <div class = "col-6">
                   <img src="{{ track['image_url'] }}" class="rounded float-start" alt="{{ track['title'] }}">
               </div>
@@ -19,7 +19,7 @@
                   <h4>by: {{track['artist']}}</h4>
               </div>
           </div>
-          <div class = "row justify-content-center">
+          <div class = "row justify-content-center p-1">
               <div class = "col-6 justify-content-center">
                 <form action="/add/review/one" method="post" class="row">
                     <input type="hidden" name="track_id" value="{{track['id']}}">
