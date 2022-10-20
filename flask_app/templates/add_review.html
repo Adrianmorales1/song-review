@@ -51,16 +51,14 @@
             <a href="/reset">Logout</a>
         </div>
         <div class="track_info">
-            {% for track in track_list %}
+            <h1>{{track['title']}}</h1>
+            <h2>{{track['artist']}}</h2>
             <img src="{{track['image_url']}}" alt="{{track['title']}}">
-            <input type="text" name="title" value="{{track['title']}}">
-            <input type="text" name="artist" value="{{track['artist']}}">
         </div>
         <form action="/add/review/one" method="post" class="formostuff">
             <input type="hidden" name="track_id" value="{{track['id']}}">
             <label>Rating <input type="int" name="rating" value="{{track['rating']}}"></label>
             <textarea name="content"  cols="30" rows="10">{{track['content']}}</textarea>
-            {% endfor %}
             <input type="submit" value="POST" id="postbtn">
         </form>
 </body>
