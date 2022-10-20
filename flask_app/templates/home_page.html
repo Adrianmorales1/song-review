@@ -10,28 +10,16 @@
 </head>
 <body>
     <div>
-        <nav class="navbar navbar-expand-lg">
-        <div class="container-fluid">
-          <a class="navbar-brand text-light" href="/track/search">Song-Review</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="/edit_profile/{{session['user_id']}}">Profile</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active text-light" aria-current="page" href="/track/search">Create Review</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link text-secondary" href="/reset"><button class="btn btn-sm btn-outline-secondary" type="button">Logout</button>
-                </a>
-            </li>
-          </div>
-        </div>
-      </nav>
     <div class = "container justify-content-center p-3">
+      <div class="flex-container">
+        <div class="align-right">
+            <a class="login" href="/dashboard">Dashboard</a>
+            <a class = "login" href="/track/search">Create a Review</a>
+            <a class = "login" href="/profile/page">Profile</a>
+            <a class="login" href="/reset">Log Out</a>
+        </div>
+        <br>
+    </div>
     <div class = "text-center">
 
             {% for review in all_reviews%} 
