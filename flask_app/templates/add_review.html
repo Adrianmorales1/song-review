@@ -4,81 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!--link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <style>
-    body {
-        background: linear-gradient(-45deg,#00d5fc,#046af6);
-    }
-
-    .Top_bar {
-        display: flex;
-        flex-direction: row;
-        border-bottom: 2px solid black;
-        align-content: space-between;
-        justify-content: space-evenly;
-    }  
-
-    a {
-        margin-top: 30px;
-    }
-
-    span {
-        color: red;
-    }
-
-    .formostuff {
-        display: flex;
-        flex-direction: column;
-        
-    }
-
-    #postbtn {
-        width: 100px;
-        height: 20px;
-        align-self: center;
-        border: none;
-        color: white;
-        background-color: darkgrey;
-    }
-    </style>
     <title>Review page</title>
 </head>
 <body>
-        <div>
-            <nav class="navbar navbar-expand-lg">
-            <div class="container-fluid">
-              <a class="navbar-brand text-light" href="/track/search">Song-Review</a>
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active text-light" aria-current="page" href="/dashboard">Profile</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link text-secondary" href="/reset"><button class="btn btn-sm btn-outline-secondary" type="button">Logout</button>
-                    </a>
-                </li>
+      <div class="container justify-content-center">
+          <div class = "row justify-content-center">
+              <div class = "col-6">
+                  <img src="{{ track['image_url'] }}" class="rounded float-start" alt="{{ track['title'] }}">
               </div>
-            </div>
-          </nav>
-        </div>
-        <div class = "row justify-content-center">
-            <div class = "col-4-xl col-4-lg col-4-md">
-                <img src="{{ track['image_url'] }}" class="rounded float-start" alt="{{ track['title'] }}">
-            </div>
-            <div class = "col-3-xl col-3-lg col-3-md">
-                <h2>{{track['title']}}</h2>
-                <h4>by: {{track['artist']}}</h4>
-            </div>
-        </div>
-        <form action="/add/review/one" method="post" class="formostuff">
-            <input type="hidden" name="track_id" value="{{track['id']}}">
-            <label>Rating <input type="number" name="rating" value="{{track['rating']}}"></label>
-            <textarea name="content"  cols="30" rows="10"></textarea>
-            <input type="submit" value="POST" id="postbtn">
-        </form>
+              <div class = "col-6">
+                  <h2>{{track['title']}}</h2>
+                  <h4>by: {{track['artist']}}</h4>
+              </div>
+          </div>
+          <div class = "row justify-content-center">
+              <div class = "col-6 justify-content-center">
+                <form action="/add/review/one" method="post" class="row">
+                    <input type="hidden" name="track_id" value="{{track['id']}}">
+                    <label>Rating <input type="number" name="rating" value="{{track['rating']}}"></label>
+                    <textarea name="content"></textarea>
+                    <input type="submit" value="POST" class = "btn btn-outline-secondary col-3 mt-2 justify-self-center">
+                </form>
+              </div>
+              
+          </div>
+      </div>
+       
+        
 </body>
 </html>
