@@ -23,8 +23,8 @@
               <div class = "col-6 justify-content-center">
                 <form action="/add/review/one" method="post" class="row">
                     <input type="hidden" name="track_id" value="{{track['id']}}">
-                    <label>Rating <input type="number" name="rating" value="{{track['rating']}}"></label>
-                    <textarea name="content"></textarea>
+                    <label>Rating <input type="number" name="rating" class = "text-dark"></label>
+                    <textarea name="content" class = "text-dark p-2"></textarea>
                     <input type="submit" value="POST" class = "btn btn-outline-secondary col-3 mt-2 justify-self-center">
                 </form>
               </div>
