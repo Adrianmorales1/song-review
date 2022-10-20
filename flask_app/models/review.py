@@ -39,7 +39,33 @@ class Review:
         query = "DELETE FROM likes WHERE review_id = %(id)s AND user_id = %(user_id)s"
         return connectToMySQL(cls.db).query_db(query,data)
     
-    
+    @classmethod
+    def get_all_reviews_with_one_user(cls, data):
+        query = "SELECT * FROM reviews LEFT JOIN users ON reviews.user_id = users.id WHERE users.id = %(id)s"
+        results = connectToMySQL(cls.db).query_db(query, data)
+
+        all_reviews = []
+
+        for row in results:
+            one_review = cls(row)
+
+            one_review_user_info = {
+                "id" : row['users.id'],
+                "first_name" : row['first_name'],
+                "last_name" : row['last_name'],
+                "email" : row['email'],
+                "password" : row['password'],
+                "created_at" : row['users.created_at'],
+                "updated_at" : row['users.updated_at']
+            }
+
+            user_data = User(one_review_user_info)
+
+            one_review.creator = user_data
+
+            all_reviews.append(one_review)
+        return all_reviews
+
     @classmethod
     def get_all_review_with_user(cls):
         #query = "SELECT * FROM reviews JOIN users ON reviews.user_id = users.id"
@@ -100,17 +126,11 @@ class Review:
     @staticmethod
     def validate_review(data):
         is_valid = True
-        if len(data['title']) < 2:
+        if len(data['content']) < 2:
             flash('Title of Review must be at least 2 characters', 'review')
             is_valid = False
-        if int(data['rating']) > 10 or int(data['rating']) < 0:
+        if int(data['rating']) > 5 or int(data['rating']) < 0:
             flash('Rating of Review must be inbetween 0-10', 'review')
-            is_valid = False
-        if not data['date_watched']:
-            flash('Date watched of Review must be entered', 'review')
-            is_valid = False
-        if len(data['content']) < 10:
-            flash('Description of Review must be at least 10 characters', 'review')
             is_valid = False
         return is_valid
     

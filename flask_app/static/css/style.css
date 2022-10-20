@@ -161,6 +161,12 @@ a.btn{
     cursor: pointer;
 }
 
+a.btn#delete {
+    background: linear-gradient(45deg,#fc0101,#ff73ab);
+    padding: 2px 10px;
+    font-size: 20px;
+}
+
 #btn:active {
     transform:  scale(1.01);
 }

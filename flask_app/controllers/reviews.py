@@ -26,7 +26,7 @@ def delete(id):
         'id' : id
     } 
     Review.delete_review(review_data)
-    return redirect('/dashboard')
+    return redirect('/profile/page')
 
 @app.route('/reviews/favorite', methods = ['POST'])
 def favorite_review():
@@ -42,7 +42,9 @@ def testing():
     if session.get('track_list') == None:
         return render_template('search_song.html')
     else :
-        return render_template('search_song.html', track_list = session['track_list'])
+        track_list1 = session['track_list']
+        session.pop('track_list')
+        return render_template('search_song.html', track_list = track_list1)
     
 
 @app.route('/searching', methods = ['POST'])
