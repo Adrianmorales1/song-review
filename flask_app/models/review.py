@@ -15,8 +15,8 @@ class Review:
         self.updated_at = data['updated_at']
         self.track_data = {}
         self.creator = None
-        self.user_who_favorited = []
-        self.user_ids_who_favorited = []
+        self.user_who_liked= []
+        self.user_ids_who_liked = []
     
     @classmethod
     def save_review(cls,data):
@@ -44,29 +44,29 @@ class Review:
     def get_all_review_with_user(cls):
         #query = "SELECT * FROM reviews JOIN users ON reviews.user_id = users.id"
         query = """SELECT * FROM reviews JOIN users AS creators on reviews.user_id = creators.id
-                LEFT JOIN favorited_reviews ON reviews.id = favorited_reviews.review_id
-                LEFT JOIN users AS users_who_favorited ON favorited_reviews.user_id = users_who_favorited.id;"""
+                LEFT JOIN likes ON reviews.id = likes.review_id
+                LEFT JOIN users AS users_who_liked ON likes.user_id = users_who_liked.id;"""
         results = connectToMySQL(cls.db).query_db(query)
 
         all_reviews = []
         for row in results:
             new_review = True
-            user_who_favorited_data = {
-                "id" : row['users_who_favorited.id'],
-                "first_name" : row['users_who_favorited.first_name'],
-                "last_name" : row['users_who_favorited.last_name'],
-                "email" : row['users_who_favorited.email'],
-                "password" : row['users_who_favorited.password'],
-                "created_at" : row['users_who_favorited.created_at'],
-                "updated_at" : row['users_who_favorited.updated_at']
+            user_who_liked_data = {
+                "id" : row['users_who_liked.id'],
+                "first_name" : row['users_who_liked.first_name'],
+                "last_name" : row['users_who_liked.last_name'],
+                "email" : row['users_who_liked.email'],
+                "password" : row['users_who_liked.password'],
+                "created_at" : row['users_who_liked.created_at'],
+                "updated_at" : row['users_who_liked.updated_at']
             }
 
             number_of_reviews = len(all_reviews)
             if number_of_reviews > 0:
                 last_review = all_reviews[number_of_reviews - 1]
                 if last_review.id == row['id']:
-                    last_review.user_ids_who_favorited.append(row['users_who_favorited.id'])
-                    last_review.users_who_favorited.append(User(user_who_favorited_data))
+                    last_review.user_ids_who_liked.append(row['users_who_liked.id'])
+                    last_review.users_who_liked.append(User(user_who_liked_data))
                     new_review = False
 
 
@@ -88,9 +88,9 @@ class Review:
 
                 one_review.creator = user_data
                 #check to see if anyone favorited 
-                if row['users_who_favorited.id']:
-                    one_review.user_ids_who_favorited.append(row['users_who_favorited.id'])
-                    one_review.users_who_favorited.append(User(user_who_favorited_data))
+                if row['users_who_liked.id']:
+                    one_review.user_ids_who_liked.append(row['users_who_liked.id'])
+                    one_review.users_who_liked.append(User(user_who_liked_data))
 
                 all_reviews.append(one_review)
         return all_reviews

@@ -28,7 +28,7 @@ def register_user():
     print(register_data)
     user_id = User.save_user(register_data)
     session['user_id'] = user_id
-    return redirect('/edit_profile/<int:user_id>')
+    return redirect('/dashboard')
 
 @app.route('/login', methods = ['POST'])
 def login_user():
