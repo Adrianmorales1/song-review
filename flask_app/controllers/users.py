@@ -76,7 +76,7 @@ def update_profile():
         'email': request.form['email'],
     }
     User.update_user(data)
-    return redirect('/edit_profile/<id:user_id>')
+    return redirect('/dashboard')
 
 @app.route('/profile/page')
 def profile_page():
