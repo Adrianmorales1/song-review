@@ -22,10 +22,18 @@
             </div>
         <div class="clearfix">
             {% for track in track_list%}
-            <img src="{{ track['image_url'] }}" class="rounded float-start" alt="{{ track['title'] }}">
-            <h2>{{track['title']}}</h2>
-            <h4>by: {{track['artist']}}</h4>
-            <a class="btn btn-primary" href="/track/review/{{track['id']}}" role="button">Review Song</a>
+            <div class = "row justify-content-center">
+                <div class = "col-1-xl col-1-lg col-2">
+                    <img src="{{ track['image_url'] }}" class="rounded float-start" alt="{{ track['title'] }}">
+                </div>
+                <div class = "col-6 col-4-sm">
+                    <h2>{{track['title']}}</h2>
+                    <h4>by: {{track['artist']}}</h4>
+                </div>
+                <div class = "col-3">
+                    <a class="btn btn-primary" href="/track/review/{{track['id']}}" role="button">Review Song</a>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>
