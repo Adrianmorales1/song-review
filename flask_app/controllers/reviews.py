@@ -13,9 +13,9 @@ def add_review():
 def add_reviews():
     data_review = {
         'user_id' : session['user_id'],
-        'title' : request.form['title'],
+        'content' : request.form['content'],
         'rating' : request.form['rating'],
-        'date_watched' : request.form['date_watched'],
+        'track_id' : request.form['track_id'],
         'content' : request.form['content']
     }
     Review.save_review(data_review)

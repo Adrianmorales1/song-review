@@ -24,6 +24,6 @@ class Track:
             'title' : entire_track['name'],
             'artist' : entire_track['album']['artists'][0]['name'],
             'id' : entire_track['id'],
-            'image_url' : entire_track['album']['images'][-1]['url']
+            'image_url' : entire_track['album']['images'][-2]['url']
         }
         return track
