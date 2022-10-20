@@ -17,32 +17,36 @@
     </div>
 
     <div class="outer">
-        <form id="form"> 
+        <form id="form" action="/reg/user" method="post"> 
             <div id="page">
                 <label>Login Form</label>
                 <div class="element">
-                    <input type="text" placeholder="Username">
+                    <input type="text" name="email" placeholder="Email">
                     <span class="fas fa-user"></span>
                 </div>
                 <div class="element">
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password">
                     <span class="fas fa-lock"></span>
                 </div>
                 <button id="btn">Login</button>
             </div>
-
+            
             <div id="page">
                 <label>Register Form</label>
                 <div class="element">
-                    <input type="text" placeholder="Email Address">
-                    <span class="fas fa-envelope"></span>
-                </div>
-                <div class="element">
-                    <input type="text" placeholder="Username">
+                    <input type="text" name='first_name'placeholder="First Name">
                     <span class="fas fa-user"></span>
                 </div>
                 <div class="element">
-                    <input type="password" placeholder="Password">
+                    <input type="text" name='last_name'placeholder="Last Name">
+                    <span class="fas fa-user"></span>
+                </div>
+                <div class="element">
+                    <input type="text" name="email" placeholder="Email Address">
+                    <span class="fas fa-envelope"></span>
+                </div>
+                <div class="element">
+                    <input type="password" name="password" placeholder="Password">
                     <span class="fas fa-lock"></span>
                 </div>
                 <div class="element">
@@ -51,10 +55,17 @@
                 </div>
                 <button id="btn">Register</button>
             </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
         </form>
-
+        
     </div>
-
+    
 </div>
 
 

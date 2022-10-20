@@ -12,6 +12,7 @@ def index():
 @app.route('/reg/user', methods = ['POST'])
 def register_user():
     if not User.validate_reg(request.form):
+        flash('Incorrect Email')
         return redirect('/')
 
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
@@ -48,8 +49,27 @@ def login_user():
 def dashboard():
     if not User.validate_session(session):
         return redirect('/')
-   
+
     return render_template('dashboard.html')
+
+@app.route('/edit_profile/<int:user_id>') #This is going to be the route for the Render of the Edit html
+def edit_profile_page(user_id): 
+    data = {
+        'id': user_id
+    }
+    user = User.get_user_by_id(data)
+    print(user)
+    return render_template('edit_profile.html', user=user)
+
+@app.route('/update_profile', methods=['POST'])
+def update_profile():
+    data = {
+        'first_name': request.form['first_name'],
+        'last_name': request.form['last_name'],
+        'email': request.form['email'],
+    }
+    User.update_user(data)
+    return redirect('/edit_profile/<id:user_id>')
 
 @app.route('/reset')
 def log_out():

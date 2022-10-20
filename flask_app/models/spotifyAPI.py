@@ -37,7 +37,7 @@ class SpotifyAPI(object):
     
     def get_token_data(self):
         return {
-                 "grant_type" : "client_credentials"
+                "grant_type" : "client_credentials"
             }
 
     def perform_auth(self):
