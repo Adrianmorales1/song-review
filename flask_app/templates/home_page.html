@@ -22,12 +22,54 @@
                 <a class="nav-link active text-light" aria-current="page" href="/edit_profile/{{session['user_id']}}">Profile</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link active text-light" aria-current="page" href="/track/search">Create Review</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link text-secondary" href="/reset"><button class="btn btn-sm btn-outline-secondary" type="button">Logout</button>
                 </a>
             </li>
           </div>
         </div>
       </nav>
+            {% for review in all_reviews%} 
+              {% for track in all_tracks%}
+                {% if review.track_id == track['id'] %}
+                    <div class="card mb-3" style="max-width: 540px;">
+                      <div class="row g-0">
+                        <div class="col-md-4">
+                          <img src="{{track['image_url']}}" class="img-fluid rounded-start" alt="{{track['title']}}">
+                        </div>
+                        <div class="col-md-8">
+                          <div class="card-body">
+                            <h5 class="card-title text-dark">{{track['title']}} By: {{track['artist']}}</h5>
+                            <p class="card-text text-dark">{{review['content']}}</p>
+                            <p class = "card-text text-secondary">By: {{review.creator.first_name}} {{review.creator.last_name}}</p>
+                            <div>
+                              {% for x in range(review.rating)%}
+                              <span style="font-size:100%;color:rgb(173, 173, 173);">&starf;</span>
+                              {% endfor %}
+                            </div>
+                              {% if user['id'] not in review.user_ids_who_liked %}
+                                <form action="/reviews/favorite" method="post">
+                                    <input type="hidden" name="user_id" value = "{{user['id']}}">
+                                    <input type="hidden" name="id" value = "{{review.id}}">
+                                    <h3 class = "text-dark">{{review.user_ids_who_liked|length}}<button type="submit">Like</button></h3>
+                                </form>
+                              {% endif %}
+                              {% if user['id'] in review.user_ids_who_liked %}
+                                <form action="/reviews/unfavorite" method="post">
+                                    <input type="hidden" name="user_id" value = "{{user['id']}}">
+                                    <input type="hidden" name="id" value = "{{review.id}}">
+                                    <h3 class = "text-dark">{{review.user_ids_who_liked|length}}<button type="submit">Unlike</button></h3>
+                                </form>
+                              {% endif %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                {% endif %}
+              {% endfor %}
+            {% endfor%}  
     </div>
 </body>
 </html>

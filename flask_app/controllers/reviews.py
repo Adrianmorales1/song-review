@@ -28,12 +28,12 @@ def delete(id):
     Review.delete_review(review_data)
     return redirect('/dashboard')
 
-@app.route('/reviews/<int:id>/favorite', methods = ['POST'])
-def favorite_review(id):
+@app.route('/reviews/favorite', methods = ['POST'])
+def favorite_review():
     Review.favorite(request.form)
     return redirect('/dashboard')
-@app.route('/reviews/<int:id>/unfavorite', methods = ['POST'])
-def unfavorite_review(id):
+@app.route('/reviews/unfavorite', methods = ['POST'])
+def unfavorite_review():
     Review.unfavorite(request.form)
     return redirect('/dashboard')
 

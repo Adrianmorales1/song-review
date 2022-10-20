@@ -31,12 +31,12 @@ class Review:
 
     @classmethod
     def favorite(cls,data):
-        query = "INSERT INTO likes(user_id, review_id) VALUES (%(user_id)s,%(id)s)"
+        query = "INSERT INTO likes(review_id, user_id) VALUES (%(id)s,%(user_id)s)"
         return connectToMySQL(cls.db).query_db(query,data)
     
     @classmethod
     def unfavorite(cls,data):
-        query = "DELETE FROM likes WHERE user_id = %(user_id)s AND review_id = %(id)s"
+        query = "DELETE FROM likes WHERE review_id = %(id)s AND user_id = %(user_id)s"
         return connectToMySQL(cls.db).query_db(query,data)
     
     
@@ -45,7 +45,8 @@ class Review:
         #query = "SELECT * FROM reviews JOIN users ON reviews.user_id = users.id"
         query = """SELECT * FROM reviews JOIN users AS creators on reviews.user_id = creators.id
                 LEFT JOIN likes ON reviews.id = likes.review_id
-                LEFT JOIN users AS users_who_liked ON likes.user_id = users_who_liked.id;"""
+                LEFT JOIN users AS users_who_liked ON likes.user_id = users_who_liked.id
+                ORDER BY reviews.created_at DESC;"""
         results = connectToMySQL(cls.db).query_db(query)
 
         all_reviews = []
@@ -66,7 +67,7 @@ class Review:
                 last_review = all_reviews[number_of_reviews - 1]
                 if last_review.id == row['id']:
                     last_review.user_ids_who_liked.append(row['users_who_liked.id'])
-                    last_review.users_who_liked.append(User(user_who_liked_data))
+                    last_review.user_who_liked.append(User(user_who_liked_data))
                     new_review = False
 
 
@@ -90,7 +91,7 @@ class Review:
                 #check to see if anyone favorited 
                 if row['users_who_liked.id']:
                     one_review.user_ids_who_liked.append(row['users_who_liked.id'])
-                    one_review.users_who_liked.append(User(user_who_liked_data))
+                    one_review.user_who_liked.append(User(user_who_liked_data))
 
                 all_reviews.append(one_review)
         return all_reviews
