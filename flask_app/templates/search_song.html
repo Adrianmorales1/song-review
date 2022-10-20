@@ -20,12 +20,12 @@
                 </div>
             </form>
             </div>
-        <div>
+        <div class="clearfix">
             {% for track in track_list%}
             <img src="{{ track['image_url'] }}" class="rounded float-start" alt="{{ track['title'] }}">
+            <h2>{{track['artist']}}</h2>
             <h2>{{track['title']}}</h2>
             <a href="/reviewsong">{{track['id']}}</a>
-            <h2>{{track['artist']}}</h2>
             {% endfor %}
         </div>
     </div>
