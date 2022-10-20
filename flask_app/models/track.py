@@ -20,10 +20,10 @@ class Track:
         client_secret = "2d36f1dd9ed54c6f99af70d48e7495bf"
         spotify = SpotifyAPI(client_id,client_secret)
         entire_track = spotify.get_track(id)
-        track = [{
+        track = {
             'title' : entire_track['name'],
             'artist' : entire_track['album']['artists'][0]['name'],
             'id' : entire_track['id'],
             'image_url' : entire_track['album']['images'][-1]['url']
-        }]
+        }
         return track
