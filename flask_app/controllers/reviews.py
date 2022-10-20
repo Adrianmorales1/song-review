@@ -48,7 +48,7 @@ def testing():
         return render_template('search_song.html', track_list = session['track_list'])
     
 
-@app.route('/track/search', methods = ['POST'])
+@app.route('/searching', methods = ['POST'])
 def track_search():
     query = request.form['query']
     track_list = Track.search_query(query)
