@@ -3,7 +3,7 @@ from flask import Flask, request, redirect, session, render_template, flash
 from flask_app.models.review import Review
 from flask_app.models.user import User
 from flask_app.controllers import users
-
+from flask_app.models.track import Track
 
 @app.route('/add/review')
 def add_review():
@@ -39,3 +39,18 @@ def favorite_review(id):
 def unfavorite_review(id):
     Review.unfavorite(request.form)
     return redirect('/dashboard')
+
+@app.route('/track/search')
+def testing():
+    if session.get('track_list') == None:
+        return render_template('search_song.html')
+    else :
+        return render_template('search_song.html', track_list = session['track_list'])
+    
+
+@app.route('/track/search', methods = ['POST'])
+def track_search():
+    query = request.form['query']
+    track_list = Track.search_query(query)
+    session['track_list'] = track_list
+    return redirect('/track/search')

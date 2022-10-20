@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/track/search" method="post">
+        <input type="text" name="query">
+        <button>Search Button</button>
+    </form>
+
+    {% for track in track_list%}
+        <img src="{{ track['image_url'] }}" alt="{{ track['title'] }}">
+        <h2>{{track['title']}}</h2>
+        <h2>{{track['id']}}</h2>
+        <h2>{{track['artist']}}</h2>
+    {% endfor %}
+</body>
+</html>
