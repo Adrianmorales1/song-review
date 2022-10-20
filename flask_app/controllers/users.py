@@ -1,6 +1,8 @@
 from flask_app import app
 from flask import Flask, request, redirect, session, render_template, flash
+from flask_app.models.track import Track
 from flask_app.models.user import User
+from flask_app.models.review import Review
 from flask_app.controllers import reviews
 from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
@@ -49,7 +51,9 @@ def login_user():
 def dashboard():
     #if not User.validate_session(session):
     #   return redirect('/')
-   
+   all_reviews = Review.get_all_review_with_user()
+   for review in all_reviews:
+    review['track_data'] = Track.get_one_track_by_id(review['track_id'])
     return render_template('home_page.html')
 
 @app.route('/edit_profile/<int:user_id>') #This is going to be the route for the Render of the Edit html
