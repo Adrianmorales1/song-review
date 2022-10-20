@@ -54,3 +54,8 @@ def track_search():
     track_list = Track.search_query(query)
     session['track_list'] = track_list
     return redirect('/track/search')
+
+@app.route('/track/review/<string:track_id>')
+def review_track(track_id):
+    track_data = Track.get_one_track_by_id(track_id)
+    return render_template('add_review.html', track = track_data)

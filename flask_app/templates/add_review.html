@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+
+    .Top_bar {
+        display: flex;
+        flex-direction: row;
+        border-bottom: 2px solid black;
+        align-content: space-between;
+        justify-content: space-evenly;
+    }
+
+    a {
+        margin-top: 30px;
+    }
+
+    span {
+        color: red;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    </style>
+    <title>Review page</title>
+</head>
+<body>
+    <div class="Top_bar">
+        <h1>S<span>R</span></h1>
+        <a href="/dashboard">Home</a>
+        <a href="">Profile</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <form action="/add/review/one" method="post">
+        <img src="{{track['image_url']}}" alt="{{track['title']}}">
+        <input type="text" name="title" value="{{track['title']}}">
+        <input type="text" name="artist" value="{{track['artist']}}">
+        <label>Rating <input type="int" name="rating" value="{{track['rating']}}"></label>
+        <textarea name="content"  cols="30" rows="10">{{track['content']}}</textarea>
+        <input type="submit" value="POST" id="postbtn">
+    </form>
+
+    
+</body>
+</html>
