@@ -31,10 +31,12 @@
           </div>
         </div>
       </nav>
+    <div class = "text-center">
+
             {% for review in all_reviews%} 
               {% for track in all_tracks%}
                 {% if review.track_id == track['id'] %}
-                    <div class="card mb-3" style="max-width: 540px;">
+                    <div class="card mb-3 border-dark" style="max-width: 540px;">
                       <div class="row g-0">
                         <div class="col-md-4">
                           <img src="{{track['image_url']}}" class="img-fluid rounded-start" alt="{{track['title']}}">
@@ -44,32 +46,37 @@
                             <h5 class="card-title text-dark">{{track['title']}} By: {{track['artist']}}</h5>
                             <p class="card-text text-dark">{{review['content']}}</p>
                             <p class = "card-text text-secondary">By: {{review.creator.first_name}} {{review.creator.last_name}}</p>
-                            <div>
+                            <div class = "row">
+                              <div class = "col-6">
                               {% for x in range(review.rating)%}
-                              <span style="font-size:100%;color:rgb(173, 173, 173);">&starf;</span>
+                                <span style="font-size:100%;color:rgb(173, 173, 173);">&starf;</span>
                               {% endfor %}
+                              </div>
+                              <div class="col-6">
+                                {% if user['id'] not in review.user_ids_who_liked %}
+                                    <form action="/reviews/favorite" method="post">
+                                        <input type="hidden" name="user_id" value = "{{user['id']}}">
+                                        <input type="hidden" name="id" value = "{{review.id}}">
+                                        <h3 class = "text-dark">{{review.user_ids_who_liked|length}}<button class = "btn btn-outline-danger"type="submit">Like</button></h3>
+                                    </form>
+                                  {% endif %}
+                                  {% if user['id'] in review.user_ids_who_liked %}
+                                    <form action="/reviews/unfavorite" method="post">
+                                        <input type="hidden" name="user_id" value = "{{user['id']}}">
+                                        <input type="hidden" name="id" value = "{{review.id}}">
+                                        <h3 class = "text-dark">{{review.user_ids_who_liked|length}}   <button class = "btn btn-danger" type="submit">Unlike</button></h3>
+                                    </form>
+                                  {% endif %}
+                              </div >
                             </div>
-                              {% if user['id'] not in review.user_ids_who_liked %}
-                                <form action="/reviews/favorite" method="post">
-                                    <input type="hidden" name="user_id" value = "{{user['id']}}">
-                                    <input type="hidden" name="id" value = "{{review.id}}">
-                                    <h3 class = "text-dark">{{review.user_ids_who_liked|length}}<button type="submit">Like</button></h3>
-                                </form>
-                              {% endif %}
-                              {% if user['id'] in review.user_ids_who_liked %}
-                                <form action="/reviews/unfavorite" method="post">
-                                    <input type="hidden" name="user_id" value = "{{user['id']}}">
-                                    <input type="hidden" name="id" value = "{{review.id}}">
-                                    <h3 class = "text-dark">{{review.user_ids_who_liked|length}}<button type="submit">Unlike</button></h3>
-                                </form>
-                              {% endif %}
                           </div>
                         </div>
                       </div>
                     </div>
                 {% endif %}
               {% endfor %}
-            {% endfor%}  
+            {% endfor%}
+      </div>
     </div>
 </body>
 </html>
