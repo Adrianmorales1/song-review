@@ -69,6 +69,7 @@ body {
     letter-spacing: 1px;
     cursor: pointer;
     transition: 0.3s ease;
+    color: white;
 }
 
 .register {
