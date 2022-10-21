@@ -9,13 +9,20 @@ bcrypt = Bcrypt(app)
 
 @app.route('/')
 def index():
-    return render_template('register.html')
+    return redirect('/login')
+
+@app.route('/login')
+def login():
+    return render_template('login.html')
+@app.route('/register')
+def register():
+    return render_template('register2.html')
 
 @app.route('/reg/user', methods = ['POST'])
 def register_user():
     if not User.validate_reg(request.form):
         flash('Incorrect Email')
-        return redirect('/')
+        return redirect('/register')
 
     pw_hash = bcrypt.generate_password_hash(request.form['password'])
 
@@ -116,3 +123,10 @@ def user_profile_page(id):
 def log_out():
     session.clear()
     return redirect('/')
+
+@app.route('/testing')
+def testing2():
+    return render_template('register2.html')
+@app.route('/testing2')
+def testing3():
+    return render_template('login.html')

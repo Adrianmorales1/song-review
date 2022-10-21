@@ -161,6 +161,28 @@ a.btn{
     cursor: pointer;
 }
 
+a.btn#on {
+    padding: 5px 25px;
+    background: linear-gradient(45deg, #0326f9,#01fcf9);
+    border-radius: 50px;
+    font-size: 25px;
+    text-transform: uppercase;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+a.btn#off {
+    padding: 5px 25px;
+    background: linear-gradient(45deg, #d8d8d8,#868686);
+    border-radius: 50px;
+    font-size: 25px;
+    text-transform: uppercase;
+    border: none;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
 a.btn#delete {
     background: linear-gradient(45deg,#fc0101,#ff73ab);
     padding: 2px 10px;
