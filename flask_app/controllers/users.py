@@ -48,7 +48,6 @@ def login_user():
             return redirect('/')
 
         session['user_id'] = user.id
-        flash("login was successful!")
         return redirect('/dashboard')
 
     flash('email is not tied to an account', 'login')
