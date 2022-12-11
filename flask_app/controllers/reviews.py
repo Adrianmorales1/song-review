@@ -77,6 +77,5 @@ def user_profile(user_id):
     all_reviews1 = Review.get_all_reviews_with_one_user(data)
     all_tracks1 = []
     for review in all_reviews1:
-        print(Track.get_one_track_by_id(review.track_id))
         all_tracks1.append(Track.get_one_track_by_id(review.track_id))
     return render_template("user_profile.html", user = user_data, all_reviews = all_reviews1, all_tracks = all_tracks1)

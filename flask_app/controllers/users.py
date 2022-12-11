@@ -32,7 +32,6 @@ def register_user():
         'email' : request.form['email'],
         'password' : pw_hash
     }
-    print(register_data)
     user_id = User.save_user(register_data)
     session['user_id'] = user_id
     return redirect('/dashboard')
@@ -99,7 +98,6 @@ def profile_page():
     all_reviews1 = Review.get_all_reviews_with_one_user(data)
     all_tracks1 = []
     for review in all_reviews1:
-        print(Track.get_one_track_by_id(review.track_id))
         all_tracks1.append(Track.get_one_track_by_id(review.track_id))
     return render_template('profile_page.html', user = user_data, all_reviews = all_reviews1, all_tracks = all_tracks1)
 
